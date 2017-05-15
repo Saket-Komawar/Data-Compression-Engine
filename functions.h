@@ -35,6 +35,12 @@ void storeHuffList(char *huffList, path *paths, int cnt);
 void binaryConversion(char *buffer, char *binary, path *paths);
 void appendRedundantBits(char *binary);
 void binToAscii(char *binary, char *output);
+void mergeSort(list *l);
+void mergeSortUtil(node **headRef, int n);
+node* merge(node *l, node *r);
+void splitList(node *head, node **left, node **right, int n);
+
+
 //----------------------------------------------------------------------------
 void reStorePath(char *huffList,path *paths, int uCount);
 char* asciiToBin(char *binary, char *output);

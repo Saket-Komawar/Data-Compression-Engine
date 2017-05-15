@@ -6,8 +6,7 @@
 
 int main(int argc, char *argv[]){
 	if(argc == 1){
-		printf("Very Few Arguments\n");
-		printf("File Name Missing\n");
+		printf("compress: missing file name operand.\n");
 		exit(1);
 	}
 
@@ -50,7 +49,7 @@ int main(int argc, char *argv[]){
 	buffer[i] = '\0';
 	fclose(fp);
 
-	bubbleSort(l); //Initial Sorting According to Weight.
+	mergeSort(l); //Initial Sorting According to Weight.
 
 	l = huffmanTree(l);
 

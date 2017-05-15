@@ -30,6 +30,53 @@ void bubbleSort(list *l){
 	}
 }
 
+void mergeSort(list *l){
+	mergeSortUtil(&(l->head), l->cnt);
+}
+
+void mergeSortUtil(node **headRef, int n){
+	if(n <= 1)
+		return;
+	int mid = n / 2;
+	node *l, *r;
+	splitList(*headRef, &l, &r, n);
+
+	mergeSortUtil(&l, mid);
+	mergeSortUtil(&r, n - mid);
+	*headRef = merge(l , r);
+}
+
+void splitList(node *head, node **left, node **right, int n){
+	int i, mid = n / 2;
+	node *pre;
+	*right = head;
+	for (i = 0; i < mid; i++){
+		pre = *right;
+		*right = (*right)->next;
+	}
+	pre->next = NULL;
+	*left = head;
+}
+
+node* merge(node *l, node *r){
+	if(l == NULL)
+		return r;
+	else if(r == NULL)
+		return l;
+
+	node *result;
+	if(l->frequency <= r->frequency){
+		result = l;
+		result->next = merge(l->next, r);
+	}
+	else{
+		result = r;
+		result->next = merge(l, r->next);
+	}
+	return result;
+}
+
+
 void preOrder(node *t){
 	if(t){
 		if(t->flag)
@@ -58,7 +105,7 @@ list* huffmanTree(list *l){
 		tmp->right = first;
 		huffList->head = tmp;
 		huffList->cnt--;
-		bubbleSort(huffList);
+		mergeSort(huffList);
 	}
 	huffList->cnt = l->cnt;
 	return huffList;
